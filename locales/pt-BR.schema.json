@@ -1490,6 +1490,9 @@
     "main-collection-product-grid": {
       "name": "Grade de produtos",
       "settings": {
+        "banner_inside_grid": {
+          "label": "Banner dentro do grid de produtos"
+        },
         "products_per_page": {
           "label": "Produtos por página"
         },

@@ -20,18 +20,28 @@ if (!customElements.get('product-form')) {
       onSubmitHandler(evt) {
         evt.preventDefault();
         if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
-
+      
         this.handleErrorMessage();
-
+      
         this.submitButton.setAttribute('aria-disabled', true);
         this.submitButton.classList.add('loading');
         this.querySelector('.loading__spinner').classList.remove('hidden');
-
+      
         const config = fetchConfig('javascript');
         config.headers['X-Requested-With'] = 'XMLHttpRequest';
         delete config.headers['Content-Type'];
-
+      
         const formData = new FormData(this.form);
+
+        const grelhaSide = document.querySelector('input[name="grelha-side"]:checked')?.value;
+        console.log("documenteasdasd", document.querySelector('input[name="grelha-side"]'))
+        if (grelhaSide) {
+          console.log("grelhaSide", grelhaSide)
+          formData.append('properties[Lado da Grelha]', grelhaSide);
+        } else {
+          console.log("NÃO EXISTE grelhaSide")
+        }
+      
         if (this.cart) {
           formData.append(
             'sections',
@@ -41,7 +51,7 @@ if (!customElements.get('product-form')) {
           this.cart.setActiveElement(document.activeElement);
         }
         config.body = formData;
-
+      
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
           .then((response) => {
@@ -53,7 +63,7 @@ if (!customElements.get('product-form')) {
                 message: response.message,
               });
               this.handleErrorMessage(response.description);
-
+      
               const soldOutMessage = this.submitButton.querySelector('.sold-out-message');
               if (!soldOutMessage) return;
               this.submitButton.setAttribute('aria-disabled', true);
@@ -65,7 +75,7 @@ if (!customElements.get('product-form')) {
               window.location = window.routes.cart_url;
               return;
             }
-
+      
             if (!this.error)
               publish(PUB_SUB_EVENTS.cartUpdate, {
                 source: 'product-form',
@@ -99,6 +109,7 @@ if (!customElements.get('product-form')) {
             this.querySelector('.loading__spinner').classList.add('hidden');
           });
       }
+      
 
       handleErrorMessage(errorMessage = false) {
         if (this.hideErrors) return;
