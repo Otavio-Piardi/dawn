@@ -155,6 +155,12 @@
                 {% assign lazy_load = false %}
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
+                  {%- if forloop.index == 5 and section.settings.image_1 -%}
+                    {%- liquid
+                      assign class_img = 'scroll-trigger animate--slide-in'
+                    -%}
+                    {{ section.settings.image_1 | image_url: width: 3840 | image_tag: width: 3840, class: class_img }}
+                  {%- endif -%}
                 {%- endif -%}
                 <li
                   class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -198,6 +204,11 @@
   "name": "t:sections.main-collection-product-grid.name",
   "class": "section",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Banner entre cards de produto"
+    },
     {
       "type": "range",
       "id": "products_per_page",

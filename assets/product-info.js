@@ -51,6 +51,7 @@ if (!customElements.get('product-info')) {
       }
 
       initializeProductSwapUtility() {
+        this.handleClickDuvida();
         this.preProcessHtmlCallbacks.push((html) =>
           html.querySelectorAll('.scroll-trigger').forEach((element) => element.classList.add('scroll-trigger--cancel'))
         );
@@ -308,6 +309,18 @@ if (!customElements.get('product-info')) {
         const modalContent = this.productModal?.querySelector(`.product-media-modal__content`);
         const newModalContent = html.querySelector(`product-modal .product-media-modal__content`);
         if (modalContent && newModalContent) modalContent.innerHTML = newModalContent.innerHTML;
+      }
+
+      handleClickDuvida() {
+        console.log("teste")
+        const duvidas = document.querySelectorAll(".span-duvida");
+        
+        duvidas.forEach(duvida => {
+          console.log("duvida", duvida)
+          duvida.addEventListener('click', () => {
+              console.log(`Você clicou na dúvida: ${duvida}`);
+          });
+      });
       }
 
       setQuantityBoundries() {

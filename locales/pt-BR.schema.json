@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "settings_schema": {
     "colors": {
@@ -1490,6 +1499,9 @@
     "main-collection-product-grid": {
       "name": "Grade de produtos",
       "settings": {
+        "banner_inside_grid": {
+          "label": "Banner dentro do grid de produtos"
+        },
         "products_per_page": {
           "label": "Produtos por página"
         },
